@@ -1,0 +1,53 @@
+/* Estilos personalizados */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.hero-section {
+    background: url('../assets/flor_hero.jpg') no-repeat center center/cover;
+    height: 100vh;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: fadeIn 2s ease-in;
+}
+
+.services-section {
+    padding: 50px 0;
+    background-color: #f9f9f9;
+}
+
+.service-card {
+    transition: transform 0.3s;
+}
+
+.service-card:hover {
+    transform: scale(1.05);
+}
+
+footer {
+    background-color: #222;
+    color: #fff;
+    padding: 20px 0;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
