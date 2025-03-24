@@ -8,52 +8,215 @@
     <link href="./css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Wix+Madefor+Display:wght@400..800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.min.css">
 </head>
 
 <body>
 
     <header class="hero-section">
         <h1 data-aos="fade-up" class="display-4">Roseira do Luquinhas</h1>
-        <p data-aos="fade-up" data-aos-delay="200" class="lead">Sua floricultura online com as mais belas flores para todas as ocasiões</p>
-        <a href="#servicos" class="btn btn-light btn-lg" data-aos="fade-up" data-aos-delay="400">Confira nossos serviços</a>
+        <p data-aos="fade-up" data-aos-delay="200" class="lead">Sua floricultura online com as mais belas flores para
+            todas as ocasiões</p>
+        <a href="#servicos" class="btn btn-light btn-lg" data-aos="fade-up" data-aos-delay="400">Confira nossos
+            serviços</a>
     </header>
 
     <section id="servicos" class="services-section">
         <div class="container">
             <div class="row text-center">
-                <div class="col-md-4" data-aos="fade-up">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4" data-aos="fade-up">
                     <div class="card service-card shadow-lg">
                         <img src="assets/arranjo.jpg" class="card-img-top" alt="Arranjos de Flores">
                         <div class="card-body">
                             <h5 class="card-title">Arranjos de Flores</h5>
-                            <p class="card-text">Criamos arranjos personalizados para todas as ocasiões. Faça sua encomenda e surpreenda alguém especial!</p>
-                            <a href="#" class="btn btn-primary">Saiba mais</a>
+                            <p class="card-text">Criamos arranjos personalizados para todas as ocasiões. Faça sua
+                                encomenda e surpreenda alguém especial!</p>
+                            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#servicoModal"
+                                data-img="assets/arranjo.jpg" data-titulo="Arranjos de Flores"
+                                data-descricao="Criamos arranjos personalizados para todas as ocasiões. Faça sua encomenda e surpreenda alguém especial!"
+                                data-preco="R$ 50,00">Saiba mais</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4" data-aos="fade-up" data-aos-delay="200">
                     <div class="card service-card shadow-lg">
                         <img src="assets/vasos.jpeg" class="card-img-top" alt="Vasos e Plantas">
                         <div class="card-body">
                             <h5 class="card-title">Vasos e Plantas</h5>
-                            <p class="card-text">Oferecemos uma vasta gama de plantas e vasos para sua casa ou escritório. Encontre a opção perfeita para o seu ambiente.</p>
-                            <a href="#" class="btn btn-primary">Saiba mais</a>
+                            <p class="card-text">Oferecemos uma vasta gama de plantas e vasos para sua casa ou
+                                escritório. Encontre a opção perfeita para o seu ambiente.</p>
+                            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#servicoModal"
+                                data-img="assets/vasos.jpeg" data-titulo="Vasos"
+                                data-descricao="Oferecemos uma vasta gama de plantas e vasos para sua casa ou escritório. Encontre a opção perfeita para o seu ambiente."
+                                data-preco="R$ 25,00">Saiba mais</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4" data-aos="fade-up" data-aos-delay="400">
                     <div class="card service-card shadow-lg">
                         <img src="assets/cestas.webp" class="card-img-top" alt="Cestas e Presentes">
                         <div class="card-body">
                             <h5 class="card-title">Cestas e Presentes</h5>
-                            <p class="card-text">As melhores cestas de presente com flores frescas, chocolates e outros itens especiais para qualquer data comemorativa.</p>
-                            <a href="#" class="btn btn-primary">Saiba mais</a>
+                            <p class="card-text">As melhores cestas de presente com flores frescas, chocolates e outros
+                                itens especiais para qualquer data comemorativa.</p>
+                            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#servicoModal"
+                                data-img="assets/cestas.webp" data-titulo="Cestas e Presentes"
+                                data-descricao="As melhores cestas de presente com flores frescas, chocolates e outros itens especiais para qualquer data comemorativa."
+                                data-preco="R$ 100,00">Saiba mais</a>
                         </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="card service-card shadow-lg">
+                        <img src="assets/orquideas.jpg" class="card-img-top" alt="Orquídeas">
+                        <div class="card-body">
+                            <h5 class="card-title">Orquídeas</h5>
+                            <p class="card-text">Lindas orquídeas para decorar seu espaço e presentear com elegância.
+                            </p>
+                            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#servicoModal"
+                                data-img="assets/orquideas.jpg" data-titulo="Orquídeas"
+                                data-descricao="Lindas orquídeas para decorar seu espaço e presentear com elegância."
+                                data-preco="R$ 70,00">Saiba mais</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4" data-aos="fade-up" data-aos-delay="800">
+                    <div class="card service-card shadow-lg">
+                        <img src="assets/buque.webp" class="card-img-top" alt="Buquê de Rosas">
+                        <div class="card-body">
+                            <h5 class="card-title">Buquê de Rosas</h5>
+                            <p class="card-text">Buquês de rosas vermelhas e coloridas para momentos inesquecíveis.</p>
+                            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#servicoModal"
+                                data-img="assets/buque.webp" data-titulo="Buquês"
+                                data-descricao="Buquês de rosas vermelhas e coloridas para momentos inesquecíveis."
+                                data-preco="R$ 40,00">Saiba mais</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4" data-aos="fade-up" data-aos-delay="800">
+                    <div class="card service-card shadow-lg">
+                        <img src="assets/medicinais.jpg" class="card-img-top" alt="Plantas Medicinais">
+                        <div class="card-body">
+                            <h5 class="card-title">Plantas Medicinais e Aromáticas</h5>
+                            <p class="card-text">Hortelã, alecrim, lavanda e outras ervas frescas para sua casa.</p>
+                            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#servicoModal"
+                                data-img="assets/medicinais.jpg" data-titulo="Plantas medicinais"
+                                data-descricao="Hortelã, alecrim, lavanda e outras ervas frescas para sua casa."
+                                data-preco="R$ 20,00">Saiba mais</a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="modal fade" id="servicoModal" tabindex="-1" aria-labelledby="servicoModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="servicoModalLabel">Detalhes do Serviço</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="assets/arranjo.jpg" id="modal-img" class="img-fluid mb-3" alt="Imagem do Serviço">
+                        <h5 id="modal-titulo"></h5>
+                        <p id="modal-descricao"></p>
+                        <h4 id="modal-preco" class="text-danger"></h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary" id="btn-comprar">Comprar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <section id="duvidas" class="faq-section py-5">
+        <div class="container">
+            <h2 class="text-center">Dúvidas Frequentes</h2>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            Como faço um pedido?
+                        </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">Basta selecionar os produtos desejados e finalizar sua compra pelo
+                            nosso site.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            Quais são as formas de pagamento?
+                        </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">Aceitamos cartões de crédito, débito, Pix e boleto bancário.</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <section id="avaliacoes" class="testimonials-section py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">O que nossos clientes dizem</h2>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <div class="card shadow-sm p-4 border-0 h-100 review-card">
+                        <img src="assets/arthur.jpg" class="rounded-circle mx-auto d-block mb-3" width="80"
+                            alt="Arturito">
+                        <blockquote class="blockquote flex-grow-1">
+                            <p class="mb-3">"Comprei um buquê para minha esposa e ela adorou! Sensacional."</p>
+                        </blockquote>
+                        <footer class="blockquote-footer mt-2">Arturito</footer>
+                        <div class="text-warning mt-2">★★★★★</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm p-4 border-0 h-100 review-card">
+                        <img src="assets/thiago.png" class="rounded-circle mx-auto d-block mb-3" width="80"
+                            alt="Thiago Porto">
+                        <blockquote class="blockquote flex-grow-1">
+                            <p class="mb-3">"A melhor floricultura! Variedade, qualidade e preço justo."</p>
+                        </blockquote>
+                        <footer class="blockquote-footer mt-2">Thiago Porto</footer>
+                        <div class="text-warning mt-2">★★★★★</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm p-4 border-0 h-100 review-card">
+                        <img src="assets/henrique.jpg" class="rounded-circle mx-auto d-block mb-3" width="80"
+                            alt="Doutor Henrique">
+                        <blockquote class="blockquote flex-grow-1">
+                            <p class="mb-3">"Flores incríveis, entrega rápida e atendimento impecável!"</p>
+                        </blockquote>
+                        <footer class="blockquote-footer mt-2">Doutor Henrique</footer>
+                        <div class="text-warning mt-2">★★★★★</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
 
     <footer>
         <div class="container text-center">
@@ -64,10 +227,11 @@
             </p>
         </div>
     </footer>
-
-    <script src="./js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.all.min.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/script.js"></script>
+    
     <script>
         AOS.init();
     </script>
