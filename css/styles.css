@@ -48,9 +48,12 @@ footer a:hover {
 }
 
 .card-img-top {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
+    width: 50%;
+    height: 200px;
+    object-fit:contain;
+    align-self: center;
+    margin-top: 2%;
+    border-radius: 10px;
 }
 
 .card {
@@ -61,4 +64,14 @@ footer a:hover {
     font-size: 20px;
     color: white;
     font-weight: bold;
+}
+
+.btn-cart{
+    background-color: green;
+    color: white;
+}
+
+.btn-cart:hover{
+    background-color: green;
+    color: white;
 }
