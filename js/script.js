@@ -1,8 +1,11 @@
 const modal = document.getElementById('servicoModal');
-const cart = []
+const cartModal = new bootstrap.Modal(document.getElementById("cartModal"));
+const cart = JSON.parse(localStorage.getItem('cart')) || [];
 modal.addEventListener('show.bs.modal', function (event) {
   const button = event.relatedTarget;
 
+
+  const id = button.getAttribute('data-id');
   const imgSrc = button.getAttribute('data-img');
   const titulo = button.getAttribute('data-titulo');
   const descricao = button.getAttribute('data-descricao');
@@ -36,39 +39,91 @@ modal.addEventListener('show.bs.modal', function (event) {
     sendToWhatsapp()
   })
 
-  btnCart.addEventListener('click', () => {
-
-    console.log(preco.replace('R$ ', ''), parseFloat(preco),  inputQuantidade.value, parseInt(inputQuantidade.value), parseInt(inputQuantidade.value) * parseFloat(preco))
-
-    if(inputQuantidade.value > 1) {
-      const data = {
-        title: titulo,
-        price: preco,
-        quantity: inputQuantidade.value,
-        total: parseInt(inputQuantidade.value) * parseFloat(preco)
-      }
+  btnCart.removeEventListener('click', function() {
+    let quantity = parseInt(inputQuantidade.value) <= 0 || inputQuantidade.value === "" ? 1 : parseInt(inputQuantidade.value);
   
-      addCart(data)
-
-      Swal.fire({
-        icon: 'success',
-        title: 'Produto adicionado ao carrinho',
-        confirmButtonText: 'Fechar',
-        confirmButtonColor: '#3085d6',
-      });
-
-      console.log(data, cart, button.getAttribute('data-id'))
-    }else{
-      Swal.fire({
-        icon: 'warning',
-        title: 'Quantidade inválida',
-        text: 'Por favor, escolha uma quantidade maior que 1',
-        confirmButtonText: 'Fechar',
-        confirmButtonColor: '#3085d6',
-      });
-    }
-  })
+    handleCart(parseInt(id), quantity);
+  });
+  btnCart.addEventListener('click', function() {
+    let quantity = parseInt(inputQuantidade.value) <= 0 || inputQuantidade.value === "" ? 1 : parseInt(inputQuantidade.value);
+  
+    handleCart(parseInt(id), quantity);
+  });
 });
+
+const handleRenderCart = () => {
+  cartModal.show();
+
+  var cartItems = document.getElementById("cart-items");
+  cartItems.innerHTML = "";
+
+  if (cart.length > 0) {
+    cart.forEach(function(product) {
+      var item = document.createElement("div");
+      item.classList.add("cart-item");
+      item.innerHTML = `
+        <div class="cart-item-details">
+          <div class="cart-item-quantity">${product.quantity} x</div>
+          <div class="cart-item-title">${product.title}</div>
+        </div>
+        <div class="cart-item-total">R$ ${product.total}</div>
+        <div class="cart-item-remove">
+          <button class="btn btn-danger" onclick="removeFromCart(${product.id})">X</button>
+        </div>
+      `;
+      cartItems.appendChild(item);
+    });
+  }
+}
+
+document.getElementById("btn-cart-home").addEventListener("click", handleRenderCart);
+
+const handleCart = (id, quantity) => {
+  addCart(parseInt(id), quantity)
+
+  Swal.fire({
+    icon: 'success',
+    title: 'Produto adicionado ao carrinho',
+    confirmButtonText: 'Fechar',
+    confirmButtonColor: '#3085d6',
+  });
+
+  inputQuantidade.value = ""
+}
+
+const addCart = (id, quantity) => {
+  const product = products.find(product => product.id === id);
+  const productOnCart = cart.find(product => product.id === id);
+
+  let newQuantity = quantity;
+
+  if (productOnCart) {
+    newQuantity = productOnCart.quantity + quantity;
+    removeFromCart(id);
+  }
+
+  cart.push({
+    id: product.id,
+    title: product.title,
+    quantity: newQuantity,
+    price: product.price,
+    total: (parseFloat(product.price) * newQuantity).toFixed(2)
+  })
+
+  localStorage.setItem('cart', JSON.stringify(cart));
+  
+}
+
+const removeFromCart = (id) => {
+  const index = cart.findIndex(product => product.id === id);
+
+  if (index !== -1) {
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
+  handleRenderCart();
+}
 
 const sendToWhatsapp = () => {
   const telefone = '+558391945349';
@@ -76,10 +131,3 @@ const sendToWhatsapp = () => {
   const url = `https://api.whatsapp.com/send?phone=${telefone}&text=${encodeURIComponent(mensagem)}`;
   window.open(url, '_blank');
 }
-
-const addCart = (product) => {
-  cart.push(product)
-  localStorage.setItem('cart', JSON.stringify(cart))
-}
-
-

@@ -1,3 +1,11 @@
+::-webkit-scrollbar{
+    display: none;
+}
+
+input{
+    outline: none;
+}
+
 .hero-section {
     background: url('../assets/flor_hero.jpg') no-repeat center center/cover;
     height: 100vh;
@@ -74,4 +82,47 @@ footer a:hover {
 .btn-cart:hover{
     background-color: green;
     color: white;
+}
+
+.btn-cart-home{
+    position: fixed;
+            bottom: 10px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: green;
+            border: 1px solid transparent;
+            color: white;
+            transition: 0.5s ease;
+            transform: scale(0.9);
+}
+
+.btn-cart-home:hover{
+    background-color: green;
+    color: white;
+    transition: 0.5s ease;
+            transform: scale(1);
+}
+
+.cart-item{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-item-details{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.cart-item-title{
+    width: 80%;
 }

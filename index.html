@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roseira do Luquinhas</title>
+    <title>Roseira do sternurinhas</title>
     <link href="./css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -19,12 +19,61 @@
 <body>
 
     <header class="hero-section">
-        <h1 data-aos="fade-up" class="display-4">Roseira do Luquinhas</h1>
+        <h1 data-aos="fade-up" class="display-4">Roseira dos Ternurinhas</h1>
         <p data-aos="fade-up" data-aos-delay="200" class="lead">Sua floricultura online com as mais belas flores para
             todas as ocasiões</p>
         <a href="#servicos" class="btn btn-light btn-lg" data-aos="fade-up" data-aos-delay="400">Confira nossos
             serviços</a>
     </header>
+
+    <button type="button" class="btn btn-cart-home" id="btn-cart-home">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-basket2-fill" viewBox="0 0 16 16">
+            <path d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0zm4-1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1"/>
+          </svg>
+    </button>
+
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cartModalLabel">Carrinho de Compras</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="cart-items">
+                    Seu carrinho está vazio.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success">Finalizar Compra</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="filtros" class="container py-3">
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" id="search" class="form-control" placeholder="Buscar pelo nome">
+            </div>
+            <div class="col-md-4">
+                <select id="category" class="form-control">
+                    <option value="">Todas as categorias</option>
+                    <option value="Planta">Planta</option>
+                    <option value="Medicinal">Medicinal</option>
+                    <option value="Vasos">Vasos</option>
+                    <option value="Flores">Flores</option>
+                    <option value="Orquideas">Orquídeas</option>
+                    <option value="Arranjos">Arranjos</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <select id="sort" class="form-control">
+                    <option value="">Ordenar</option>
+                    <option value="asc">A - Z</option>
+                    <option value="desc">Z - A</option>
+                </select>
+            </div>
+        </div>
+    </section>
 
     <section id="servicos" class="services-section">
         <div class="container">
@@ -47,6 +96,7 @@
                         <h5 id="modal-titulo"></h5>
                         <p id="modal-descricao"></p>
                         <h4 id="modal-preco" class="text-danger"></h4>
+                        <input type="hidden" id="modal-id">
                     </div>
                     <div class="modal-footer">
                         <input type="number" class="form-control w-25 required" id="input-quantidade">
@@ -105,7 +155,7 @@
                         <blockquote class="blockquote flex-grow-1">
                             <p class="mb-3">"Comprei um buquê para minha esposa e ela adorou! Sensacional."</p>
                         </blockquote>
-                        <footer class="blockquote-footer mt-2">Arturito</footer>
+                        <footer class="blockquote-footer mt-2">João Pedro</footer>
                         <div class="text-warning mt-2">★★★★★</div>
                     </div>
                 </div>
@@ -116,7 +166,7 @@
                         <blockquote class="blockquote flex-grow-1">
                             <p class="mb-3">"A melhor floricultura! Variedade, qualidade e preço justo."</p>
                         </blockquote>
-                        <footer class="blockquote-footer mt-2">Thiago Porto</footer>
+                        <footer class="blockquote-footer mt-2">Sormany</footer>
                         <div class="text-warning mt-2">★★★★★</div>
                     </div>
                 </div>
@@ -127,7 +177,7 @@
                         <blockquote class="blockquote flex-grow-1">
                             <p class="mb-3">"Flores incríveis, entrega rápida e atendimento impecável!"</p>
                         </blockquote>
-                        <footer class="blockquote-footer mt-2">Doutor Henrique</footer>
+                        <footer class="blockquote-footer mt-2">Pablo Haimar</footer>
                         <div class="text-warning mt-2">★★★★★</div>
                     </div>
                 </div>
@@ -135,15 +185,12 @@
         </div>
     </section>
 
-
-
-
     <footer>
         <div class="container text-center">
-            <p>&copy; 2025 Roseira do Luquinhas. Todos os direitos reservados.</p>
+            <p>&copy; 2025 Roseira dos Ternurinhas. Todos os direitos reservados.</p>
             <p>
-                <a href="https://www.instagram.com/roseiradoluquinhas" target="_blank">Instagram</a> |
-                <a href="mailto:contato@roseiradoluquinhas.com">Email</a>
+                <a href="https://www.instagram.com/roseiradosternurinhas" target="_blank">Instagram</a> |
+                <a href="mailto:contato@roseiradosternurinhas.com">Email</a>
             </p>
         </div>
     </footer>
