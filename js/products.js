@@ -150,7 +150,7 @@ const renderProducts = () => {
         <img src="${product.img}" class="card-img-top" alt="${product.title}">
         <div class="card-body">
           <h5 class="card-title">${product.title}</h5>
-          <h4 class="text-danger"> ${product.price}</h4>
+          <h4 class="text-danger">R$ ${product.price}</h4>
           <div>
             <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#servicoModal"
             data-img="${product.img}" data-titulo="${product.title}"
