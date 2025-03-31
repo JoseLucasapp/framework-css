@@ -1,6 +1,21 @@
 const modal = document.getElementById('servicoModal');
 const cartModal = new bootstrap.Modal(document.getElementById("cartModal"));
-const cart = JSON.parse(localStorage.getItem('cart')) || [];
+const btnFinish = document.getElementById("btn-finish");
+const checkoutModal = new bootstrap.Modal(document.getElementById("checkoutModal"));
+const btnFinishCheckout = document.getElementById("btn-finish-checkout");
+const cart = [];
+
+const handleCart = (id, quantity) => {
+  addCart(parseInt(id), quantity)
+
+  Swal.fire({
+    icon: 'success',
+    title: 'Produto adicionado ao carrinho',
+    confirmButtonText: 'Fechar',
+    confirmButtonColor: '#3085d6',
+  });
+}
+
 modal.addEventListener('show.bs.modal', function (event) {
   const button = event.relatedTarget;
 
@@ -28,28 +43,35 @@ modal.addEventListener('show.bs.modal', function (event) {
 
 
   btnComprar.addEventListener('click', () => {
-    Swal.fire({
-      icon: 'success',
-      title: 'Obrigado por confiar nos nossos serviços!',
-      text: 'Seu pedido foi encaminhado e será processado.',
-      confirmButtonText: 'Fechar',
-      confirmButtonColor: '#3085d6',
-    });
 
-    sendToWhatsapp()
+    addCart(parseInt(id), 1);
+
+    const modalProduto = bootstrap.Modal.getInstance(modal);
+    modalProduto.hide();
+
+    setTimeout(() => {
+      checkoutModal.show();
+    }, 500); 
+
   })
 
-  btnCart.removeEventListener('click', function() {
+  btnCart.onclick = function () {
     let quantity = parseInt(inputQuantidade.value) <= 0 || inputQuantidade.value === "" ? 1 : parseInt(inputQuantidade.value);
-  
+    
     handleCart(parseInt(id), quantity);
-  });
-  btnCart.addEventListener('click', function() {
-    let quantity = parseInt(inputQuantidade.value) <= 0 || inputQuantidade.value === "" ? 1 : parseInt(inputQuantidade.value);
   
-    handleCart(parseInt(id), quantity);
-  });
+    inputQuantidade.value = "";
+  };
 });
+
+btnFinish.addEventListener('click', () => {
+  checkoutModal.show();
+})
+
+btnFinishCheckout.addEventListener('click', () => {
+  checkoutModal.hide();
+  sendToWhatsapp();
+})
 
 const handleRenderCart = () => {
   cartModal.show();
@@ -76,58 +98,79 @@ const handleRenderCart = () => {
   }
 }
 
+
 document.getElementById("btn-cart-home").addEventListener("click", handleRenderCart);
-
-const handleCart = (id, quantity) => {
-  addCart(parseInt(id), quantity)
-
-  Swal.fire({
-    icon: 'success',
-    title: 'Produto adicionado ao carrinho',
-    confirmButtonText: 'Fechar',
-    confirmButtonColor: '#3085d6',
-  });
-
-  inputQuantidade.value = ""
-}
 
 const addCart = (id, quantity) => {
   const product = products.find(product => product.id === id);
   const productOnCart = cart.find(product => product.id === id);
 
-  let newQuantity = quantity;
-
   if (productOnCart) {
-    newQuantity = productOnCart.quantity + quantity;
-    removeFromCart(id);
+    productOnCart.quantity += quantity;
+    productOnCart.total = (parseFloat(productOnCart.price) * productOnCart.quantity).toFixed(2);
+  } else {
+    cart.push({
+      id: product.id,
+      title: product.title,
+      quantity: quantity,
+      price: product.price,
+      total: (parseFloat(product.price) * quantity).toFixed(2)
+    });
   }
+};
 
-  cart.push({
-    id: product.id,
-    title: product.title,
-    quantity: newQuantity,
-    price: product.price,
-    total: (parseFloat(product.price) * newQuantity).toFixed(2)
-  })
-
-  localStorage.setItem('cart', JSON.stringify(cart));
-  
-}
 
 const removeFromCart = (id) => {
   const index = cart.findIndex(product => product.id === id);
 
   if (index !== -1) {
     cart.splice(index, 1);
-    localStorage.setItem('cart', JSON.stringify(cart));
   }
 
   handleRenderCart();
 }
 
+document.getElementById('input-pagamento').addEventListener('change', function() {
+  const trocoContainer = document.getElementById('troco-container');
+  if (this.value === 'Dinheiro') {
+    trocoContainer.classList.remove('d-none');
+  } else {
+    trocoContainer.classList.add('d-none');
+    document.getElementById('input-troco').value = ''; // Limpar valor
+  }
+});
+
+
 const sendToWhatsapp = () => {
-  const telefone = '+558391945349';
-  const mensagem = 'Olá, gostaria de fazer um pedido:\n';
+  const endereco = document.getElementById('input-endereco').value.trim();
+  const pagamento = document.getElementById('input-pagamento').value;
+  const troco = document.getElementById('input-troco').value.trim();
+  
+  if (!endereco) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Por favor, preencha o endereço!',
+      confirmButtonColor: '#3085d6'
+    });
+    return;
+  }
+
+  let mensagem = `📍 *Endereço de Entrega:*\n${endereco}\n\n💳 *Forma de Pagamento:* ${pagamento}`;
+  if (pagamento === 'Dinheiro' && troco) {
+    mensagem += `\n💰 Troco para: R$ ${troco}`;
+  }
+
+  if (cart.length > 0) {
+    mensagem += '\n\n🛒 *Itens no Carrinho:*';
+    cart.forEach((product, index) => {
+      mensagem += `\n${index + 1}. *${product.title}*\n   ➖ Quantidade: ${product.quantity}\n   💰 Total: R$ ${product.total}`;
+    });
+
+    const totalPedido = cart.reduce((sum, item) => sum + parseFloat(item.total), 0);
+    mensagem += `\n\n🛍️ *Total do Pedido:* R$ ${totalPedido.toFixed(2)}`;
+  }
+
+  const telefone = '+5583996792355';
   const url = `https://api.whatsapp.com/send?phone=${telefone}&text=${encodeURIComponent(mensagem)}`;
   window.open(url, '_blank');
-}
+};

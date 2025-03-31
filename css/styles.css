@@ -100,6 +100,7 @@ footer a:hover {
             color: white;
             transition: 0.5s ease;
             transform: scale(0.9);
+            z-index: 9999;
 }
 
 .btn-cart-home:hover{
@@ -114,6 +115,7 @@ footer a:hover {
     width: 100%;
     justify-content: space-between;
     align-items: center;
+    margin: 1%
 }
 
 .cart-item-details{
@@ -125,4 +127,33 @@ footer a:hover {
 
 .cart-item-title{
     width: 80%;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: black;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+}
+
+.carousel-control-prev-icon{
+    margin-right: 50px;
+}
+
+.carousel-control-next-icon{
+    margin-left: 50px;
+}
+
+.carousel-control-prev, .carousel-control-next{
+    height: 100%;
+    width: 40px;
+    opacity: 1;
+}
+
+@media screen and (max-width: 768px) {
+
+    .carousel-control-prev, .carousel-control-next{
+        display: none;
+    }
+    
 }
